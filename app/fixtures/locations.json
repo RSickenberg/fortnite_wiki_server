@@ -1,0 +1,1 @@
+[{"model": "app.locationitems", "pk": 2, "fields": {"location": "Ground"}}, {"model": "app.locationitems", "pk": 3, "fields": {"location": "Chest"}}, {"model": "app.locationitems", "pk": 4, "fields": {"location": "Vending"}}, {"model": "app.locationitems", "pk": 5, "fields": {"location": "Supplies"}}, {"model": "app.locationitems", "pk": 6, "fields": {"location": "Lamas"}}]

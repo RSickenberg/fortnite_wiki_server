@@ -1,9 +1,11 @@
-# from django.conf import settings
 from django.contrib import admin
-# from django.template.loader import get_template
-# from django.urls import reverse
 
-from .models import Weapon, WeaponGroup, ItemGroup, Item
+from .models import Item, ItemDetail, ItemGroup, LocationItems, Weapon, WeaponDetail, WeaponGroup
+
+
+@admin.register(WeaponGroup)
+class WeaponGroupAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Weapon)
@@ -11,8 +13,8 @@ class WeaponAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(WeaponGroup)
-class WeaponGroupAdmin(admin.ModelAdmin):
+@admin.register(WeaponDetail)
+class WeaponDetailAdmin(admin.ModelAdmin):
     pass
 
 
@@ -23,4 +25,14 @@ class ItemGroupAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ItemDetail)
+class ItemDetailAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(LocationItems)
+class LocationAdmin(admin.ModelAdmin):
     pass

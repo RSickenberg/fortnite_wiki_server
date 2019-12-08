@@ -1,0 +1,1 @@
+[{"model": "app.weapon", "pk": 1, "fields": {"name": "Dummy weapon", "variants": 0, "image": "tmp_HOTTvhz.png", "group": 1, "is_removed": false}}]

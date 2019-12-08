@@ -1,0 +1,1 @@
+[{"model": "app.itemdetail", "pk": 1, "fields": {"item_id": 1, "is_heal": true, "is_explosive": false, "heal": 0, "shield": 0, "delay": 0.0, "damages": 0, "capacity": 1, "comment": "Test", "location": [2, 3, 4]}}]

@@ -89,6 +89,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+postgres
+po
 
 # Spyder project settings
 .spyderproject
