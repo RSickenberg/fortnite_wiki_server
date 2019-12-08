@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.utils.translation import gettext_lazy as _
+
+admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+
+admin.site.site_header = _('Fortnite Wiki - Server')
+admin.site.site_title = _('Fortnite Wiki - Server')
+admin.site.index_title = _('App methods')

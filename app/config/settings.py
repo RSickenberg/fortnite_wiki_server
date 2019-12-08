@@ -129,3 +129,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/tmp/static/media'
+
+
+# JSON ##################
+JSON_PROD_URL = 'https://rsickenberg.me/secret/json/fortnite/prod.json'
+#########################

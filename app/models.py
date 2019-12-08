@@ -2,6 +2,15 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class Version(models.Model):
+    season = models.IntegerField(_('Season #'), blank=True, null=True)
+    version = models.FloatField(_('Ingame version'), blank=False, null=False)
+
+    def __str__(self):
+        return 'Season {} with version {}'.format(self.season, self.version) if self.season else 'Version {}'.format(
+            self.version)
+
+
 class WeaponGroup(models.Model):
     # ASSAULT_RIFFLE = 0
     # SHOTGUNS = 1
@@ -151,7 +160,7 @@ class Item(models.Model):
         return "{}".format(self.name)
 
 
-class LocationItems(models.Model):
+class LocationItem(models.Model):
     # GROUND = 'G'
     # CHEST = 'C'
     # VENDING = 'V'
@@ -185,7 +194,7 @@ class ItemDetail(models.Model):
     delay = models.FloatField(_('Delay'), null=False, blank=False)
     damages = models.IntegerField(_('Damages'), null=False, blank=False)
     location = models.ManyToManyField(
-        to=LocationItems,
+        to=LocationItem,
         verbose_name=_('Location'),
         blank=True,
         related_name='item_detail'
