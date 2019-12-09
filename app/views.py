@@ -6,7 +6,7 @@ from .models import Item, ItemDetail, LocationItem, Version, Weapon, WeaponDetai
 
 def json_response(request):
     # Serialise all models to a Json file like in prod.
-    version = Version.objects.latest('id').version
+    version = Version.objects.latest('pk').version
     weapons = [
         {**weapon['fields'], 'id': weapon['pk']} for weapon in serializers.serialize('python', Weapon.objects.all())
     ]
