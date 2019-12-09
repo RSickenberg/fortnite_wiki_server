@@ -48,7 +48,7 @@ class Weapon(models.Model):
         choices=VARIANTS_CHOICES,
         default=GRAY
     )
-    image = models.ImageField(_('Weapon image'))
+    image = models.CharField(_('Weapon image name'), max_length=100, help_text='Precise image name with extension.')
     group = models.ForeignKey(
         to=WeaponGroup,
         verbose_name=_("Weapon group"),
@@ -57,6 +57,7 @@ class Weapon(models.Model):
         on_delete=models.SET_NULL
     )
     is_removed = models.BooleanField(_('Is removed ?'), default=False, null=False, blank=False)
+    last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
         return "{}".format(self.name)
@@ -105,13 +106,15 @@ class WeaponDetail(models.Model):
 
     fire_rate_burst = models.FloatField(_('Fire rate (burst)'), null=False, blank=False, help_text=_('May be removed.'))
 
-    environement_damages = models.FloatField(_('Environmental damages'), null=False, blank=False)
+    environment_damages = models.FloatField(_('Environmental damages'), null=False, blank=False)
 
     recoil_horizontal = models.FloatField(_('Recoil horizontal'), null=False, blank=False)
     recoil_vertical = models.FloatField(_('Recoil vertical'), null=False, blank=False)
     recoil_max_angle = models.FloatField(_('Recoil max angle'), null=False, blank=False)
     recoil_min_angle = models.FloatField(_('Recoil min angle'), null=False, blank=False)
     recoil_downsights = models.FloatField(_('Recoil downsights'), null=False, blank=False)
+
+    last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
         return "Details for weapon [{}] with level: {}".format(self.weapon_id.name, self.detail_level)
@@ -146,7 +149,7 @@ class Item(models.Model):
         choices=VARIANTS_CHOICES,
         default=GRAY
     )
-    image = models.ImageField(_('Item image'))
+    image = models.CharField(_('Item image name'), max_length=100, help_text='Precise image name with extension.')
     group = models.ForeignKey(
         to=ItemGroup,
         verbose_name=_('Item group'),
@@ -155,6 +158,7 @@ class Item(models.Model):
         related_name='item'
     )
     is_removed = models.BooleanField(_('Is removed ?'), default=False, null=False, blank=False)
+    last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
         return "{}".format(self.name)
@@ -201,6 +205,7 @@ class ItemDetail(models.Model):
     )
     capacity = models.IntegerField(_('Capacity'), null=False, blank=False)
     comment = models.TextField(_('Comments'), null=False, blank=True)
+    last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
         return '[{}] details'.format(self.item_id.name)
