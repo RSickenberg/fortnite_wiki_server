@@ -117,7 +117,9 @@ class WeaponDetail(models.Model):
     last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
-        return "Details for weapon [{}] with level: {}".format(self.weapon_id.name, self.detail_level)
+        if self.weapon_id and self.detail_level:
+            return "Details for weapon [{}] with level: {}".format(self.weapon_id.name, self.detail_level)
+        return "Details for undefined weapon with level: {}".format(self.detail_level)
 
 
 class ItemGroup(models.Model):
@@ -165,18 +167,6 @@ class Item(models.Model):
 
 
 class LocationItem(models.Model):
-    # GROUND = 'G'
-    # CHEST = 'C'
-    # VENDING = 'V'
-    # SUPPLIES = 'S'
-    # LAMAS = 'L'
-    # LOCATION_CHOICES = (
-    #     (GROUND, _('Ground')),
-    #     (CHEST, _('Chests')),
-    #     (VENDING, _('Vending')),
-    #     (SUPPLIES, _('Supply')),
-    #     (LAMAS, _('LAMAS'))
-    # )
     location = models.CharField(_('Location'), blank=True, null=False, max_length=90)
 
     def __str__(self):
@@ -208,4 +198,6 @@ class ItemDetail(models.Model):
     last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
-        return '[{}] details'.format(self.item_id.name)
+        if self.item_id:
+            return '[{}] details'.format(self.item_id.name)
+        return 'Details for undefined item'

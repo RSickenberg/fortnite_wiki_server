@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
+from app import views
+
 admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('json', views.json_response, name='json_response')
 ]
 
 

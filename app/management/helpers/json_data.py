@@ -97,12 +97,15 @@ class JsonData:
         # The goal is to deconstruct JSON "Ground, Chests, Supply" and link recent item to it.
         # Difficulty: String to location name
         for location in details.get('location').split(','):
-            db_location, _ = LocationItem.objects.get_or_create(
-                location__contains=location.replace(' ', ''),
+            db_location, created = LocationItem.objects.get_or_create(
+                location__contains=location.strip(),
                 defaults={
-                    'location': location
+                    'location': location.strip()
                 }
             )
+            if created:
+                print('[LOCATION] Created: {}'.format(db_location.location))
+
             self.item_details.location.add(db_location)
 
         self.item_details.save()

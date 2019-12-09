@@ -37,6 +37,7 @@ class ItemDetailAdmin(admin.ModelAdmin):
 
 @admin.register(LocationItem)
 class LocationItemsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'location')
     pass
 
 
