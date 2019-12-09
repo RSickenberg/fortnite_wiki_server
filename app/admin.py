@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Item, ItemDetail, LocationItem, Weapon, WeaponDetail, Version, WeaponGroup, ItemGroup
+from .models import Item, ItemDetail, ItemGroup, LocationItem, Version, Weapon, WeaponDetail, WeaponGroup
 
 
 @admin.register(Weapon)

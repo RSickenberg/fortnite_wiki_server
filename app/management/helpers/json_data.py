@@ -1,8 +1,4 @@
-import os
-
-from django.conf import Settings
-
-from app.models import Item, ItemDetail, ItemGroup, Weapon, WeaponDetail, WeaponGroup, LocationItem
+from app.models import Item, ItemDetail, ItemGroup, LocationItem, Weapon, WeaponDetail, WeaponGroup
 
 
 class JsonData:
@@ -110,5 +106,4 @@ class JsonData:
             self.item_details.location.add(db_location)
 
         self.item_details.save()
-
         print('[ITEM_DETAILS] Imported: {}'.format(self.item_details))
