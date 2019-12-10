@@ -1,10 +1,18 @@
 version: '3.7'
 
+x-build_context:
+  &x-build_context
+  context: ./docker/
+
 services:
   db:
     image: postgres
+    ports:
+    - 5432
   backend:
-    build: .
+    build:
+      <<: *x-build_context
+      dockerfile: Dockerfile-backend
     command: sh -c 'while true; do ./manage.py runserver 0.0.0.0:8000; sleep 1; done'
     volumes:
       - .:/code
@@ -12,3 +20,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    links:
+      - db:db
+    stdin_open: true
+    tty: true
