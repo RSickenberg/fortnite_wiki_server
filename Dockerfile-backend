@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y git-all
 USER app
 RUN python -m venv "$VIRTUAL_ENV"
 
+COPY . /code/
 WORKDIR /code
 
 COPY entrypoint-backend.sh /

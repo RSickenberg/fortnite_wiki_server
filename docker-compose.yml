@@ -2,7 +2,7 @@ version: '3.7'
 
 x-build_context:
   &x-build_context
-  context: ./docker/
+  context: .
 
 services:
   db:
