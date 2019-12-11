@@ -13,7 +13,6 @@ def import_env_vars(directory):
 
     for env_var in env_vars:
         with open(env_var, 'r') as env_var_file:
-            print('imported env: {}'.format(env_var.split(os.sep)[-1]))
             os.environ.setdefault(env_var.split(os.sep)[-1], env_var_file.read().strip())
 
 

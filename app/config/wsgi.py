@@ -12,6 +12,8 @@ import sys
 
 from django.core.wsgi import get_wsgi_application
 
+from app.config import import_env_vars, get_project_root_path
+
 virtenv = os.path.expanduser('~') + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 try:
@@ -24,5 +26,7 @@ except IOError:
 
 sys.path.append(os.path.expanduser('~'))
 sys.path.append(os.path.expanduser('~') + '/ROOT/')
+
+import_env_vars(os.path.join(get_project_root_path(), 'envdir'))
 
 application = get_wsgi_application()

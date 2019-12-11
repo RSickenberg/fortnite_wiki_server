@@ -129,10 +129,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/tmp/static/media'
+MEDIA_ROOT = get_env_variable('MEDIA_ROOT', '/tmp/static/media')
+STATIC_ROOT = get_env_variable('STATIC_ROOT', '/tmp/static')
+MEDIA_URL = get_env_variable('MEDIA_URL', '/media/')
+STATIC_URL = get_env_variable('STATIC_URL', '/static/')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 
 # JSON ##################
