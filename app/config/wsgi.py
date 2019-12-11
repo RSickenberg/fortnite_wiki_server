@@ -12,7 +12,7 @@ import sys
 
 from django.core.wsgi import get_wsgi_application
 
-from app.config import import_env_vars, get_project_root_path
+from app.config import get_project_root_path, import_env_vars
 
 virtenv = os.path.expanduser('~') + '/virtenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
@@ -28,5 +28,6 @@ sys.path.append(os.path.expanduser('~'))
 sys.path.append(os.path.expanduser('~') + '/ROOT/')
 
 import_env_vars(os.path.join(get_project_root_path(), 'envdir'))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.config.settings')
 
 application = get_wsgi_application()
