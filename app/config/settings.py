@@ -28,9 +28,9 @@ import_env_vars(os.path.join(get_project_root_path(), 'envdir'))
 SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://fortnitewikiserver.jcloud.ik-server.com/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
