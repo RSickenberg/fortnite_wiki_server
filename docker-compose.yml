@@ -4,23 +4,45 @@ x-build_context:
   &x-build_context
   context: .
 
+x-django:
+  &x-django
+  environment:
+    ALLOWED_HOSTS: >-
+      localhost
+    DATABASE_URL: postgresql://postgres@db:5432/fortnite_server
+    WAIT_HOSTS: db:5432
+#    REDIS_URL: redis://redis-db:6379/0
+  volumes:
+    - .:/code
+    - venv:/venv
+    - ./ssh:/home/app/.ssh
+  stdin_open: true
+  tty: true
+
 services:
   db:
     image: postgres
+    container_name: db
+    environment:
+      POSTGRES_DB: fortnite_server
+      POSTGRES_PASSWORD:
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     ports:
-    - 5432
+      - 5432
+
   backend:
+    container_name: backend
+    <<: *x-django
     build:
       <<: *x-build_context
       dockerfile: Dockerfile-backend
     command: sh -c 'while true; do ./manage.py runserver 0.0.0.0:8000; sleep 1; done'
-    volumes:
-      - .:/code
     ports:
-      - "8000:8000"
+      - 8000:8000
     depends_on:
       - db
-    links:
-      - db:db
-    stdin_open: true
-    tty: true
+
+volumes:
+  pgdata:
+  venv:

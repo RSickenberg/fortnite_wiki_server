@@ -21,5 +21,7 @@ RUN python -m venv "$VIRTUAL_ENV"
 COPY . /code/
 WORKDIR /code
 
+RUN pip install
+
 COPY entrypoint-backend.sh /
 ENTRYPOINT ["sh", "/entrypoint-backend.sh"]
