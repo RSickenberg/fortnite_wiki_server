@@ -25,6 +25,4 @@ except IOError:
 sys.path.append(os.path.expanduser('~'))
 sys.path.append(os.path.expanduser('~') + '/ROOT/')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.config.settings')
-
 application = get_wsgi_application()

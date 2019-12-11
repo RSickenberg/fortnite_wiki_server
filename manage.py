@@ -7,8 +7,10 @@ from app.config import import_env_vars, get_project_root_path
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.config.settings')
     import_env_vars(os.path.join(get_project_root_path(), 'envdir'))
+
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.config.settings')
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
