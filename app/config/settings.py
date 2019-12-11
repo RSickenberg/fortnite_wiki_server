@@ -18,7 +18,6 @@ from . import get_env_variable, import_env_vars, get_project_root_path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-import_env_vars(os.path.join(get_project_root_path(), 'envdir'))
 
 
 # Quick-start development settings - unsuitable for production
