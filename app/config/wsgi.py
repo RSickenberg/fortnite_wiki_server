@@ -15,5 +15,6 @@ from app.config import import_env_vars, get_project_root_path
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 import_env_vars(os.path.join(get_project_root_path(), 'envdir'))
+print('wsgi loaded')
 
 application = get_wsgi_application()
