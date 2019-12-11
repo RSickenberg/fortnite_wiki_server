@@ -8,13 +8,23 @@ https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
 from django.core.wsgi import get_wsgi_application
 
-from app.config import import_env_vars, get_project_root_path
+virtenv = os.path.expanduser('~') + '/virtenv/'
+virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
+try:
+    if sys.version.split(' ')[0].split('.')[0] == '3':
+        exec(compile(open(virtualenv, "rb").read(), virtualenv, 'exec'), dict(__file__=virtualenv))
+    else:
+        execfile(virtualenv, dict(__file__=virtualenv))
+except IOError:
+    pass
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
-import_env_vars(os.path.join(get_project_root_path(), 'envdir'))
-print('wsgi loaded')
+sys.path.append(os.path.expanduser('~'))
+sys.path.append(os.path.expanduser('~') + '/ROOT/')
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.config.settings')
 
 application = get_wsgi_application()
