@@ -14,7 +14,7 @@ import os
 
 import dj_database_url
 
-from . import get_env_variable, import_env_vars, get_project_root_path
+from . import get_env_variable, get_project_root_path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -134,7 +134,7 @@ STATIC_ROOT = get_env_variable('STATIC_ROOT', '/tmp/static')
 MEDIA_URL = get_env_variable('MEDIA_URL', '/media/')
 STATIC_URL = get_env_variable('STATIC_URL', '/static/')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(get_project_root_path(), 'static'),
 )
 
 
