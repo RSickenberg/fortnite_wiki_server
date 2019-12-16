@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Item, ItemDetail, ItemGroup, LocationItem, Version, Weapon, WeaponDetail, WeaponGroup
+from .models import Item, ItemDetail, ItemGroup, LocationItem, Version, Weapon, WeaponDetail, WeaponGroup, Messages
 
 
 @admin.register(Weapon)
@@ -55,4 +55,10 @@ class WeaponGroupAdmin(admin.ModelAdmin):
 @admin.register(ItemGroup)
 class ItemGroupAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
+    pass
+
+
+@admin.register(Messages)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('date', 'data')
     pass

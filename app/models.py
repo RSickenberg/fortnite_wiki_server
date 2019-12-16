@@ -208,3 +208,6 @@ class ItemDetail(models.Model):
 class Messages(models.Model):
     date = models.DateField(_('Date'), auto_now=True)
     data = models.TextField(_('Message'), blank=False, null=False)
+
+    def __str__(self):
+        return '"{}" @ {}'.format(self.data, self.date)
