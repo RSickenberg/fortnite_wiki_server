@@ -9,8 +9,4 @@ echo "Running migrations ..."
 echo "Creating admin account ..."
 ./manage.py loaddata initial_users
 
-echo "Fixturize the env ..."
-./manage.py fixturize -y -s --no-reset
-
-
 exec "${@}"
