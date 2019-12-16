@@ -16,7 +16,7 @@ def json_response(request):
     ]
     weapons_details = [
         {**details['fields']} for details in serializers.serialize('python', WeaponDetail.objects.order_by(
-            'weapon_id').order_by('detail_level').all())
+            'weapon_id', 'detail_level').all())
     ]
     items_details = [
         {**details['fields']} for details in serializers.serialize('python', ItemDetail.objects.order_by(

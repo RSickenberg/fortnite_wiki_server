@@ -5,7 +5,7 @@ from .models import Item, ItemDetail, ItemGroup, LocationItem, Version, Weapon, 
 
 @admin.register(Weapon)
 class WeaponAdmin(admin.ModelAdmin):
-    list_display = ('name', 'variants', 'is_removed',)
+    list_display = ('name', 'variants', 'is_removed', 'is_incomplete',)
     list_filter = ('variants', 'is_removed',)
     readonly_fields = ('last_update',)
     pass
@@ -21,7 +21,7 @@ class WeaponDetailAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('name', 'variants', 'is_removed',)
+    list_display = ('name', 'variants', 'is_removed', 'is_incomplete',)
     list_filter = ('variants', 'is_removed', 'group',)
     readonly_fields = ('last_update',)
     pass

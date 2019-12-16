@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
@@ -26,7 +27,7 @@ urlpatterns = [
     path('json', views.json_response, name='json_response'),
     path('messages', views.view_messages, name='message_response'),
     path('', admin.site.urls)
-]
+] + staticfiles_urlpatterns()
 
 
 admin.site.site_header = _('Fortnite Wiki - Server')
