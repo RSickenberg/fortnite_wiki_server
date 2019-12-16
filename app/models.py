@@ -57,6 +57,7 @@ class Weapon(models.Model):
         on_delete=models.SET_NULL
     )
     is_removed = models.BooleanField(_('Is removed ?'), default=False, null=False, blank=False)
+    is_incomplete = models.BooleanField(_('Information limited ?'), default=False, null=False)
     last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
@@ -160,6 +161,7 @@ class Item(models.Model):
         related_name='item'
     )
     is_removed = models.BooleanField(_('Is removed ?'), default=False, null=False, blank=False)
+    is_incomplete = models.BooleanField(_('Information limited ?'), default=False, null=False)
     last_update = models.DateTimeField(_('Timestamp'), auto_now=True)
 
     def __str__(self):
@@ -201,3 +203,8 @@ class ItemDetail(models.Model):
         if self.item_id:
             return '[{}] details'.format(self.item_id.name)
         return 'Details for undefined item'
+
+
+class Messages(models.Model):
+    date = models.DateField(_('Date'), auto_now=True)
+    data = models.TextField(_('Message'), blank=False, null=False)
