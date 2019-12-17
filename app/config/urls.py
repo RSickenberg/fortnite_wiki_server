@@ -23,7 +23,6 @@ from app import views
 admin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('json', views.json_response, name='json_response'),
     path('messages', views.view_messages, name='message_response'),
     path('', admin.site.urls)
