@@ -29,8 +29,8 @@ class JsonData:
             id=weapon.get('id'),
             defaults={
                 'name': weapon.get('name'),
-                'variants': weapon.get('color'),
-                'image': weapon.get('img'),
+                'variants': weapon.get('variants'),
+                'image': weapon.get('image'),
                 'group': WeaponGroup.objects.get(id__exact=weapon.get('group')),
                 'is_removed': weapon.get('is_removed', False),
                 'is_incomplete': weapon.get('is_incomplete', False)
@@ -58,7 +58,7 @@ class JsonData:
                 'spread_standing': details.get('spread_standing'),
                 'spread_crouching': details.get('spread_crouching'),
                 'fire_rate_burst': details.get('firing_rate_burst', 0.0),
-                'environment_damages': details.get('environement_damages'),
+                'environment_damages': details.get('environment_damages'),
                 'recoil_horizontal': details.get('recoil_horizontal'),
                 'recoil_vertical': details.get('recoil_vertical'),
                 'recoil_max_angle': details.get('recoil_max_angle'),
@@ -73,8 +73,8 @@ class JsonData:
             id=item.get('id'),
             defaults={
                 'name': item.get('name'),
-                'variants': item.get('color'),
-                'image': item.get('img'),
+                'variants': item.get('variants'),
+                'image': item.get('image'),
                 'group': ItemGroup.objects.get(id=item.get('group')),
                 'is_removed': item.get('is_removed'),
                 'is_incomplete': item.get('is_incomplete', False)
