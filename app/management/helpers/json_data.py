@@ -6,11 +6,13 @@ class JsonData:
     def __init__(self, **data):
         self.weapons = data.get('data').get('weapons')
         self.items = data.get('data').get('items')
+        self.locations = data.get('data').get('locations')
         self.weapons_details = data.get('data').get('details')
         self.items_details = data.get('data').get('itemDetails')
 
         self.weapon = None
         self.weapon_details = None
+        self.location = None
         self.item = None
         self.item_details = None
 
@@ -19,6 +21,8 @@ class JsonData:
             self.import_weapon(weapon)
         for details in self.weapons_details:
             self.import_weapon_details(details)
+        for location in self.locations:
+            self.import_locations(location)
         for item in self.items:
             self.import_item(item)
         for item_details in self.items_details:
@@ -67,6 +71,15 @@ class JsonData:
             }
         )
         print('[WEAPON_DETAILS] Imported: {}'.format(self.weapon_details))
+
+    def import_locations(self, location):
+        self.location, _ = LocationItem.objects.update_or_create(
+            id=location.get('id'),
+            defaults={
+                'location': location.get('location')
+            }
+        )
+        print('[LOCATIONS] Imported: {}'.format(self.location))
 
     def import_item(self, item):
         self.item, _ = Item.objects.update_or_create(
