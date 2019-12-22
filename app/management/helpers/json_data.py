@@ -32,37 +32,38 @@ class JsonData:
                 'variants': weapon.get('color'),
                 'image': weapon.get('img'),
                 'group': WeaponGroup.objects.get(id__exact=weapon.get('group')),
-                'is_removed': weapon.get('is_removed', False)
+                'is_removed': weapon.get('is_removed', False),
+                'is_incomplete': weapon.get('is_incomplete', False)
             }
         )
         print('[WEAPON] Imported: {}'.format(self.weapon))
 
     def import_weapon_details(self, details):
         self.weapon_details, _ = WeaponDetail.objects.update_or_create(
-            detail_level=details.get('detailLevel'),
-            weapon_id=Weapon.objects.get(id=details.get('weaponId')),
+            detail_level=details.get('detail_level'),
+            weapon_id=Weapon.objects.get(id=details.get('weapon_id')),
             defaults={
-                'detail_level': details.get('detailLevel'),
-                'weapon_id': Weapon.objects.get(id=details.get('weaponId')),
+                'detail_level': details.get('detail_level'),
+                'weapon_id': Weapon.objects.get(id=details.get('weapon_id')),
                 'damage': details.get('damage'),
-                'damage_head': details.get('damageHead'),
-                'fire_rate': details.get('fireRate'),
-                'magazine_size': details.get('magazineSize'),
-                'reload_time': details.get('reloadTime'),
+                'damage_head': details.get('damage_head'),
+                'fire_rate': details.get('fire_rate'),
+                'magazine_size': details.get('magazine_size'),
+                'reload_time': details.get('reload_time'),
                 'impact': details.get('impact'),
-                'spread_base': details.get('spreadBase'),
-                'spread_sprint': details.get('spreadSprint'),
-                'spread_jump': details.get('spreadJump'),
-                'spread_downsights': details.get('spreadDownsights'),
-                'spread_standing': details.get('spreadStanding'),
-                'spread_crouching': details.get('spreadCrouching'),
-                'fire_rate_burst': details.get('firingRateBurst', 0.0),
-                'environment_damages': details.get('environementDamage'),
-                'recoil_horizontal': details.get('recoilHorizontal'),
-                'recoil_vertical': details.get('recoilVertical'),
-                'recoil_max_angle': details.get('recoilMaxAngle'),
-                'recoil_min_angle': details.get('recoilMinAngle'),
-                'recoil_downsights': details.get('recoilDownsights')
+                'spread_base': details.get('spread_base'),
+                'spread_sprint': details.get('spread_sprint'),
+                'spread_jump': details.get('spread_jump'),
+                'spread_downsights': details.get('spread_downsights'),
+                'spread_standing': details.get('spread_standing'),
+                'spread_crouching': details.get('spread_crouching'),
+                'fire_rate_burst': details.get('firing_rate_burst', 0.0),
+                'environment_damages': details.get('environement_damages'),
+                'recoil_horizontal': details.get('recoil_horizontal'),
+                'recoil_vertical': details.get('recoil_vertical'),
+                'recoil_max_angle': details.get('recoil_max_angle'),
+                'recoil_min_angle': details.get('recoil_min_angle'),
+                'recoil_downsights': details.get('recoil_downsights')
             }
         )
         print('[WEAPON_DETAILS] Imported: {}'.format(self.weapon_details))
@@ -75,17 +76,18 @@ class JsonData:
                 'variants': item.get('color'),
                 'image': item.get('img'),
                 'group': ItemGroup.objects.get(id=item.get('group')),
-                'is_removed': item.get('is_removed')
+                'is_removed': item.get('is_removed'),
+                'is_incomplete': item.get('is_incomplete', False)
             }
         )
         print('[ITEM] Imported: {}'.format(self.item))
 
     def import_item_details(self, details):
         self.item_details, _ = ItemDetail.objects.update_or_create(
-            item_id=Item.objects.get(id=details.get('itemId')),
+            item_id=Item.objects.get(id=details.get('item_id')),
             defaults={
-                'is_heal': details.get('isHeal'),
-                'is_explosive': details.get('isExplosive'),
+                'is_heal': details.get('is_heal'),
+                'is_explosive': details.get('is_explosive'),
                 'shield': details.get('shield'),
                 'heal': details.get('heal'),
                 'damages': details.get('damages'),
@@ -96,17 +98,25 @@ class JsonData:
         )
         # The goal is to deconstruct JSON "Ground, Chests, Supply" and link recent item to it.
         # Difficulty: String to location name
-        for location in details.get('location').split(','):
-            db_location, created = LocationItem.objects.get_or_create(
-                location__contains=location.strip(),
-                defaults={
-                    'location': location.strip()
-                }
+        # Legacy code no more used
+        # for location in details.get('location').split(','):
+        #     db_location, created = LocationItem.objects.get_or_create(
+        #         location__contains=location.strip(),
+        #         defaults={
+        #             'location': location.strip()
+        #         }
+        #     )
+        #     if created:
+        #         print('[LOCATION] Created: {}'.format(db_location.location))
+        #
+        #     self.item_details.location.add(db_location)
+
+        for location in details.get('location'):
+            db_location = LocationItem.objects.get(
+                pk=location
             )
-            if created:
-                print('[LOCATION] Created: {}'.format(db_location.location))
 
-            self.item_details.location.add(db_location)
-
-        self.item_details.save()
+            if db_location:
+                self.item_details.location.add(db_location)
+                self.item_details.save()
         print('[ITEM_DETAILS] Imported: {}'.format(self.item_details))
