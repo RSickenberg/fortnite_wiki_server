@@ -1,4 +1,4 @@
-django==3.0.0
+django>=3.0.2
 psycopg2==2.8.4
 pillow==6.2.1
 requests==2.22.0
