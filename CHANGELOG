@@ -3,4 +3,5 @@ VERSION 1  Project ready
 =============================
 
    Version 1.0 - 1.0 Stable version
+      27/01/2020 14:34  1.0.1  Django Security update 3.0.0 -> 3.0.2
       27/01/2020 14:29  1.0.0  initial release
