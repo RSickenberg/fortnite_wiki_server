@@ -25,7 +25,8 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('-y', '--yes', action='store_true', dest='force_yes', default=False, help='Don\' ask for '
                                                                                                       'confirmation')
-        parser.add_argument('-s', '--sync', action='store_true', dest='sync_json', default=True, help='Import json at the end')
+        parser.add_argument('-s', '--sync', action='store_true', dest='sync_json', default=True, help='Import json at '
+                                                                                                      'the end')
 
         parser.add_argument('-n', '--no-reset', action='store_true', dest='no_reset', default=False,
                             help="Avoid DB reset, directly go on with fixtures and sync.")

@@ -1,4 +1,4 @@
-from app.models import Item, ItemDetail, ItemGroup, LocationItem, Weapon, WeaponDetail, WeaponGroup
+from app.models import Item, ItemDetail, ItemGroup, LocationItem, Weapon, WeaponDetail, WeaponGroup, Version
 
 
 class JsonData:
@@ -9,6 +9,9 @@ class JsonData:
         self.locations = data.get('data').get('locations')
         self.weapons_details = data.get('data').get('details')
         self.items_details = data.get('data').get('itemDetails')
+        self.version = data.get('data').get('version')
+        self.season = data.get('data').get('season')
+        import pdb; pdb.set_trace()
 
         self.weapon = None
         self.weapon_details = None
@@ -27,6 +30,7 @@ class JsonData:
             self.import_item(item)
         for item_details in self.items_details:
             self.import_item_details(item_details)
+        self.import_season_version(self.version, self.season)
 
     def import_weapon(self, weapon):
         self.weapon, _ = Weapon.objects.update_or_create(
@@ -133,3 +137,14 @@ class JsonData:
                 self.item_details.location.add(db_location)
                 self.item_details.save()
         print('[ITEM_DETAILS] Imported: {}'.format(self.item_details))
+
+    def import_season_version(self, version, season):
+        self.version, _ = Version.objects.update_or_create(
+            version=version,
+            season=season,
+            defaults={
+                'season': season,
+                'version': version
+            }
+        )
+        print('[SEASON + VERSION] Imported: {}!'.format(self.version))
