@@ -11,7 +11,6 @@ class JsonData:
         self.items_details = data.get('data').get('itemDetails')
         self.version = data.get('data').get('version')
         self.season = data.get('data').get('season')
-        import pdb; pdb.set_trace()
 
         self.weapon = None
         self.weapon_details = None
