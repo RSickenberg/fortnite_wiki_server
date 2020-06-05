@@ -33,12 +33,12 @@ class JsonData:
 
     def import_weapon(self, weapon):
         self.weapon, _ = Weapon.objects.update_or_create(
-            id=weapon.get('id'),
+            id=weapon.get('id')+1,
             defaults={
                 'name': weapon.get('name'),
                 'variants': weapon.get('variants'),
                 'image': weapon.get('image'),
-                'group': WeaponGroup.objects.get(id__exact=weapon.get('group')),
+                'group': WeaponGroup.objects.get(id__exact=weapon.get('group')+1),
                 'is_removed': weapon.get('is_removed', False),
                 'is_incomplete': weapon.get('is_incomplete', False)
             }
@@ -48,10 +48,10 @@ class JsonData:
     def import_weapon_details(self, details):
         self.weapon_details, _ = WeaponDetail.objects.update_or_create(
             detail_level=details.get('detail_level'),
-            weapon_id=Weapon.objects.get(id=details.get('weapon_id')),
+            weapon_id=Weapon.objects.get(id=details.get('weapon_id')+1),
             defaults={
                 'detail_level': details.get('detail_level'),
-                'weapon_id': Weapon.objects.get(id=details.get('weapon_id')),
+                'weapon_id': Weapon.objects.get(id=details.get('weapon_id')+1),
                 'damage': details.get('damage'),
                 'damage_head': details.get('damage_head'),
                 'fire_rate': details.get('fire_rate'),
@@ -77,7 +77,7 @@ class JsonData:
 
     def import_locations(self, location):
         self.location, _ = LocationItem.objects.update_or_create(
-            id=location.get('id'),
+            id=location.get('id')+1,
             defaults={
                 'location': location.get('location')
             }
@@ -86,12 +86,12 @@ class JsonData:
 
     def import_item(self, item):
         self.item, _ = Item.objects.update_or_create(
-            id=item.get('id'),
+            id=item.get('id')+1,
             defaults={
                 'name': item.get('name'),
                 'variants': item.get('variants'),
                 'image': item.get('image'),
-                'group': ItemGroup.objects.get(id=item.get('group')),
+                'group': ItemGroup.objects.get(id=item.get('group')+1),
                 'is_removed': item.get('is_removed'),
                 'is_incomplete': item.get('is_incomplete', False)
             }
@@ -100,7 +100,7 @@ class JsonData:
 
     def import_item_details(self, details):
         self.item_details, _ = ItemDetail.objects.update_or_create(
-            item_id=Item.objects.get(id=details.get('item_id')),
+            item_id=Item.objects.get(id=details.get('item_id')+1),
             defaults={
                 'is_heal': details.get('is_heal'),
                 'is_explosive': details.get('is_explosive'),

@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=80, verbose_name='Weapon name')),
-                ('variants', models.CharField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=0, max_length=10, verbose_name='variants')),
+                ('variants', models.CharField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=1, max_length=10, verbose_name='variants')),
                 ('image', models.ImageField(upload_to='', verbose_name='Weapon image')),
                 ('is_removed', models.BooleanField(default=False, verbose_name='Is removed ?')),
                 ('group', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='weapon', to='app.WeaponGroup', verbose_name='Weapon group')),

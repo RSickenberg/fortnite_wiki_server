@@ -11,7 +11,6 @@ x-django:
       localhost
     DATABASE_URL: postgresql://postgres@db:5432/fortnite_server
     WAIT_HOSTS: db:5432
-#    REDIS_URL: redis://redis-db:6379/0
   volumes:
     - .:/code
     - venv:/venv
@@ -21,15 +20,17 @@ x-django:
 
 services:
   db:
-    image: postgres:12-alpine
+    image: mysql:5.6.36
     container_name: db
     environment:
-      POSTGRES_DB: fortnite_server
-      POSTGRES_PASSWORD:
+      MYSQL_DATABASE: data
+      MYSQL_USER: app
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     ports:
-      - 5432:5432
+      - 13306:3306
 
   backend:
     container_name: backend
@@ -44,5 +45,5 @@ services:
       - db
 
 volumes:
-  pgdata:
+  mysql_data:
   venv:

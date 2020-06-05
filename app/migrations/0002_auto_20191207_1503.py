@@ -21,14 +21,14 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='weapon',
             name='variants',
-            field=models.CharField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=0, max_length=10, verbose_name='Variant'),
+            field=models.CharField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=1, max_length=10, verbose_name='Variant'),
         ),
         migrations.CreateModel(
             name='Item',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=80, verbose_name='Item name')),
-                ('variants', models.CharField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=0, max_length=10, verbose_name='Variant')),
+                ('variants', models.CharField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=1, max_length=10, verbose_name='Variant')),
                 ('image', models.ImageField(upload_to='', verbose_name='Item image')),
                 ('is_removed', models.BooleanField(default=False, verbose_name='Is removed ?')),
                 ('group', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='item', to='app.ItemGroup', verbose_name='Item group')),

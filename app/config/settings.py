@@ -90,7 +90,7 @@ PROJECT_DIRNAME = 'app'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse(get_env_variable('DATABASE_URL'))
+    'default': dj_database_url.parse(get_env_variable('DATABASE_DEV_URL'))
 }
 
 

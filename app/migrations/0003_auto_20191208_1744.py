@@ -21,18 +21,18 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='item',
             name='variants',
-            field=models.IntegerField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=0, verbose_name='Variant'),
+            field=models.IntegerField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=1, verbose_name='Variant'),
         ),
         migrations.AlterField(
             model_name='weapon',
             name='variants',
-            field=models.IntegerField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=0, verbose_name='Variant'),
+            field=models.IntegerField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=1, verbose_name='Variant'),
         ),
         migrations.CreateModel(
             name='WeaponDetail',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('detail_level', models.IntegerField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=0, verbose_name='Level')),
+                ('detail_level', models.IntegerField(choices=[(0, 'COMMON'), (1, 'UNCOMMON'), (2, 'RARE'), (3, 'EPIC'), (4, 'LEGENDARY')], default=1, verbose_name='Level')),
                 ('damage', models.IntegerField(verbose_name='Damages')),
                 ('damage_head', models.FloatField(verbose_name='Damage head')),
                 ('fire_rate', models.FloatField(verbose_name='Fire rate')),

@@ -10,11 +10,11 @@ def reset_db():
     Reset database to a blank state by removing all the tables and recreating them.
     """
     with connection.cursor() as cursor:
-        cursor.execute("select tablename from pg_tables where schemaname = 'public'")
-        tables = [row[0] for row in cursor.fetchall()]
-
-        for table in tables:
-            cursor.execute('drop table "' + table + '" cascade')
+        cursor = connection.cursor()
+        cursor.execute('show tables;')
+        parts = ('DROP TABLE IF EXISTS %s;' % table for (table,) in cursor.fetchall())
+        sql = 'SET FOREIGN_KEY_CHECKS = 0;\n' + '\n'.join(parts) + 'SET FOREIGN_KEY_CHECKS = 1;\n'
+        connection.cursor().execute(sql)
 
         management.call_command('migrate', stdout=StringIO())
 
